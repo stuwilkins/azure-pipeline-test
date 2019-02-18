@@ -12,6 +12,8 @@ jobs:
 - job: Linux
   pool:
       vmImage: 'Ubuntu-16.04'
+  variables:
+      EPICS_HOST_ARCH: 'linux_x86-64'
 
   steps:
   - script: echo Hello, world!
@@ -22,8 +24,20 @@ jobs:
       echo See https://aka.ms/yaml
       echo $BUILD_BUILDNUMBER
       echo $SOURCE_BRANCH_NUMBER
-      env
+      tar cvzf areaDetector-$EPICS_HOST_ARCH.tar.gz test
     displayName: 'Run a multi-line script'
+
+  - task: GitHubRelease@0
+    inputs:
+      gitHubConnection: stuwilkins
+      repositoryName: stuwilkins/azure-pipeline-test
+      action: 'edit'
+      target: '$(Build.SourceVersion)'
+      assets: '*.tar.gz'
+      assetUploadMode: 'delete'
+      tagSource: 'Git tag'
+      tag: 'v0.1'
+    displayName: 'Create GitHub Release'
   
 - job: Windows
   pool:
