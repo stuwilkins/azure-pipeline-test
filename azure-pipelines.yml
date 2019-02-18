@@ -36,7 +36,7 @@ jobs:
       rem %BUILD_BUILDNUMBER%
       rem %SOURCE_BRANCH_NUMBER%
   - powershell: |
-      echo $EPICS_HOST_ARCH
+      echo $env:EPICS_HOST_ARCH
       $path = "test"
       $destination = "test.zip"
       $exclude = @("*.git*")
