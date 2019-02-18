@@ -43,4 +43,6 @@ jobs:
       $files = Get-ChildItem -Path $path -Exclude $exclude
       Compress-Archive -Path $files $destination -CompressionLevel Fastest
       dir 
+    env:
+        EPICS_HOST_ARCH: $(EPICS_HOST_ARCH)
     displayName: Create archive
