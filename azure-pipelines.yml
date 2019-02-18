@@ -8,17 +8,31 @@ trigger:
 
 name: $(TeamProject)_$(BuildDefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
 
-pool:
-  vmImage: 'Ubuntu-16.04'
+jobs:
+    - job: Linux
+        pool:
+            vmImage: 'Ubuntu-16.04'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+        steps:
+            - script: echo Hello, world!
+              displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-    echo $BUILD_BUILDNUMBER
-    echo $SOURCE_BRANCH_NUMBER
-    env
-  displayName: 'Run a multi-line script'
+            - script: |
+                echo Add other tasks to build, test, and deploy your project.
+                echo See https://aka.ms/yaml
+                echo $BUILD_BUILDNUMBER
+                echo $SOURCE_BRANCH_NUMBER
+                env
+              displayName: 'Run a multi-line script'
+
+    - job: Windows
+        pool:
+            vmImage: 'vs2017-win2016'
+
+        steps:
+            - script: |
+                rem %BUILD_BUILDNUMBER%
+                rem %SOURCE_BRANCH_NUMBER%
+                where tar
+                where zip
+              displayName: 'Run a multi-line script'
