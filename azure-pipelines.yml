@@ -52,6 +52,7 @@ jobs:
       where cp
       where cat
       where make
+      choco list --localonly
   - powershell: |
       $path = "test"
       $destination = "areaDetector-$env:EPICS_HOST_ARCH.zip"
