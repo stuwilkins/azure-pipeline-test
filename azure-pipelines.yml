@@ -51,6 +51,7 @@ jobs:
       rem %SOURCE_BRANCH_NUMBER%
       where cp
       where cat
+      where make
   - powershell: |
       $path = "test"
       $destination = "areaDetector-$env:EPICS_HOST_ARCH.zip"
