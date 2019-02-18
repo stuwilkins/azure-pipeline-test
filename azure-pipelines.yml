@@ -38,7 +38,7 @@ jobs:
   - powershell: |
       echo $env:EPICS_HOST_ARCH
       $path = "test"
-      $destination = "test.zip"
+      $destination = "areaDetector$env:EPICS_HOST_ARCH.zip"
       $exclude = @("*.git*")
       $files = Get-ChildItem -Path $path -Exclude $exclude
       Compress-Archive -Path $files $destination -CompressionLevel Fastest
