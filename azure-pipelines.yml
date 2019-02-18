@@ -44,3 +44,15 @@ jobs:
       Compress-Archive -Path $files $destination -CompressionLevel Fastest
       dir 
     displayName: Create archive
+
+  - task: GitHubRelease@0
+    inputs:
+      gitHubConnection: stuwilkins
+      repositoryName: stuwilkins/azure-pipeline-test
+      action: 'edit'
+      target: '$(Build.SourceVersion)'
+      assets: '*.zip'
+      assetUploadMode: 'delete'
+      tagSource: 'Git tag'
+      tag: 'v0.1'
+    displayName: 'Create GitHub Release'
