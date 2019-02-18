@@ -37,7 +37,7 @@ jobs:
       rem %SOURCE_BRANCH_NUMBER%
   - powershell: |
       $path = "test"
-      $destination = "areaDetector$env:EPICS_HOST_ARCH.zip"
+      $destination = "areaDetector-$env:EPICS_HOST_ARCH.zip"
       $exclude = @("*.git*")
       $files = Get-ChildItem -Path $path -Exclude $exclude
       Compress-Archive -Path $files $destination -CompressionLevel Fastest
