@@ -33,6 +33,9 @@ jobs:
   - script: |
       rem %BUILD_BUILDNUMBER%
       rem %SOURCE_BRANCH_NUMBER%
-      where tar
-      where zip
-    displayName: 'Run a multi-line script'
+  - powershell: |
+      $path = "test"
+      $destination = "test.zip"
+      $exclude = @("*.git*")
+      $files = Get-ChildItem -Path $path -Exclude $exclude
+      Compress-Archive -Path $files $destination -CompressionLevel Fastest
