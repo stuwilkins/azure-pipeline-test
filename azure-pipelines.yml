@@ -49,7 +49,7 @@ jobs:
   - script: |
       rem %BUILD_BUILDNUMBER%
       rem %SOURCE_BRANCH_NUMBER%
-	  where cp
+      where cp
       where cat
   - powershell: |
       $path = "test"
