@@ -35,15 +35,6 @@ jobs:
   
   steps:
   - script: |
-      rem %BUILD_BUILDNUMBER%
-      rem %SOURCE_BRANCH_NUMBER%
-      where cp
-      where cat
-      where make
-      where cp
-      choco list --localonly
-
-  - script: |
       curl -Lo boost.zip  https://dl.bintray.com/boostorg/release/1.69.0/source/boost_1_69_0.zip
     displayName: Build Boost
 
