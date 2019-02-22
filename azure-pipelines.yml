@@ -13,9 +13,7 @@ jobs:
   pool:
       vmImage: 'Ubuntu-16.04'
   variables:
-    EPICS_HOST_ARCH: 'windows-x64-static'
-    VC_ARCH: 'amd64'
-    BOOST_VERSION: '1_69_0'
+      EPICS_HOST_ARCH: 'linux-x86_64'
 
   steps:
   - script: echo Hello, world!
@@ -33,7 +31,9 @@ jobs:
   pool:
       vmImage: 'vs2017-win2016'
   variables:
-      EPICS_HOST_ARCH: 'windows-x64-static'
+    EPICS_HOST_ARCH: 'windows-x64-static'
+    VC_ARCH: 'amd64'
+    BOOST_VERSION: '1_69_0'
   
   steps:
   - script: |
