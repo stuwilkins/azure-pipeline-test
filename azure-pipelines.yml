@@ -39,5 +39,6 @@ jobs:
       unzip -q boost.zip
       cd boost_1_69_0
       call bootstrap.bat
+      .\b2 toolset=msvc link=static threading=multi runtime-link=static
     displayName: Build Boost
 
