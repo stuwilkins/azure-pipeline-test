@@ -13,7 +13,9 @@ jobs:
   pool:
       vmImage: 'Ubuntu-16.04'
   variables:
-      EPICS_HOST_ARCH: 'linux_x86-64'
+    EPICS_HOST_ARCH: 'windows-x64-static'
+    VC_ARCH: 'amd64'
+    BOOST_VERSION: '1_69_0'
 
   steps:
   - script: echo Hello, world!
@@ -35,10 +37,10 @@ jobs:
   
   steps:
   - script: |
-      curl -Lo boost.zip  https://dl.bintray.com/boostorg/release/1.69.0/source/boost_1_69_0.zip
+      curl -Lo boost.zip  https://dl.bintray.com/boostorg/release/1.69.0/source/boost_%BOOST_VERSION%.zip
       unzip -q boost.zip
-      cd boost_1_69_0
+      cd boost_%BOOST_VERSION%
       call bootstrap.bat
-      .\b2 toolset=msvc link=static threading=multi runtime-link=static
+      .\b2 address-model=64 architecture=x86 --with-test link=static --prefix=%BUILD_STAGINGDIRECTORY%/deps install
     displayName: Build Boost
 
