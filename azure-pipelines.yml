@@ -41,6 +41,6 @@ jobs:
       unzip -q boost.zip
       cd boost_%BOOST_VERSION%
       call bootstrap.bat
-      .\b2 address-model=64 architecture=x86 --with-test link=static --prefix=%BUILD_STAGINGDIRECTORY%/deps install
+      .\b2 address-model=64 architecture=x86 --with-test link=static runtime-link=static --prefix=%BUILD_STAGINGDIRECTORY%/deps install
     displayName: Build Boost
 
