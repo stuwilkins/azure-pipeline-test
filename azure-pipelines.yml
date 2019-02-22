@@ -26,18 +26,6 @@ jobs:
       echo $SOURCE_BRANCH_NUMBER
       tar cvzf areaDetector-$EPICS_HOST_ARCH.tar.gz test
     displayName: 'Run a multi-line script'
-
-  - task: GitHubRelease@0
-    inputs:
-      gitHubConnection: stuwilkins
-      repositoryName: stuwilkins/azure-pipeline-test
-      action: 'edit'
-      target: '$(Build.SourceVersion)'
-      assets: '*.tar.gz'
-      assetUploadMode: 'replace'
-      tagSource: 'Git tag'
-      tag: 'v0.1'
-    displayName: 'Create GitHub Release'
   
 - job: Windows
   pool:
@@ -52,24 +40,10 @@ jobs:
       where cp
       where cat
       where make
+      where cp
       choco list --localonly
-  - powershell: |
-      $path = "test"
-      $destination = "areaDetector-$env:EPICS_HOST_ARCH.zip"
-      $exclude = @("*.git*")
-      $files = Get-ChildItem -Path $path -Exclude $exclude
-      Compress-Archive -Path $files $destination -CompressionLevel Fastest
-      dir 
-    displayName: Create archive
 
-  - task: GitHubRelease@0
-    inputs:
-      gitHubConnection: stuwilkins
-      repositoryName: stuwilkins/azure-pipeline-test
-      action: 'edit'
-      target: '$(Build.SourceVersion)'
-      assets: '*.zip'
-      assetUploadMode: 'replace'
-      tagSource: 'Git tag'
-      tag: 'v0.1'
-    displayName: 'Create GitHub Release'
+  - script: |
+      wget https://dl.bintray.com/boostorg/release/1.69.0/source/boost_1_69_0.zip
+    displayName: Build Boost
+
